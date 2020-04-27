@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const config = require('./webpack.config')
 
 module.exports = {
-	mode: 'development',
+	// mode: 'development',
 
 	entry: config.entry,
 	module: config.module,
@@ -16,7 +16,7 @@ module.exports = {
 
 	plugins: [
 		...config.plugins,
-		new webpack.HotModuleReplacementPlugin(),
+		// new webpack.HotModuleReplacementPlugin(),
 		// enable HMR globally
 	],
 
@@ -24,7 +24,7 @@ module.exports = {
 	// devtool: 'eval',
 
 	devServer: {
-		hot: true,
+		// hot: true,
 		// enable HMR on the server
 
 		contentBase: resolve(__dirname, 'public'),
