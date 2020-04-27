@@ -108,7 +108,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 5px;
+    height: 3px;
     background: white;
     z-index: 0;
     margin: auto;
@@ -128,7 +128,7 @@
   }
   p {
     margin: auto;
-    padding: 0 1em;
+    padding: 0.3em 1em;
   }
 </style>
 
