@@ -9,13 +9,13 @@
   // === props ===
 
   export let audioElement
-  export const className = 'audio-player'
+  export const className = ''
 
   // === state ===
 
   let loading = true
   let playing = false
-  let classes = [className, 'root'].join(' ')
+  let classes = [className, 'audio-player-component'].filter(Boolean).join(' ')
   let playTime = 0
   let totalTime = 0
   let playRate = 0
@@ -120,7 +120,7 @@
 </script>
 
 <style>
-  .root {
+  .audio-player-component {
     background-color: black;
     color: white;
     display: inline-flex;
@@ -144,7 +144,7 @@
     margin-right: 1rem;
   }
   .volume {
-    width: 60px;
+    width: 65px;
     max-width: 20vw;
     margin-right: 1rem;
   }

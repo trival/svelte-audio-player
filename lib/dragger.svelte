@@ -52,14 +52,14 @@
 </script>
 
 <style>
-  .dragger {
+  .audio-player-component-dragger {
     position: relative;
     margin: auto 0;
     cursor: pointer;
     height: 100%;
     width: 100%;
   }
-  .dragger::after {
+  .audio-player-component-dragger::after {
     content: ' ';
     position: absolute;
     display: block;
@@ -78,7 +78,7 @@
     top: 50%;
     transform: translateY(-50%) translateX(-50%);
     width: 5px;
-    height: 15px;
+    height: 16px;
     background-color: white;
     border: 3px solid black;
     z-index: 1;
@@ -88,7 +88,7 @@
 </style>
 
 <div
-  class="dragger"
+  class="audio-player-component-dragger"
   bind:this={element}
   on:mousedown={selectValue}
   on:mousemove={onDrag}
