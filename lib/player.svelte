@@ -15,7 +15,9 @@
 
   let loading = true
   let playing = false
-  let classes = [className, 'audio-player-component'].filter(Boolean).join(' ')
+  let classes = [className, 'audio-player-component-line']
+    .filter(Boolean)
+    .join(' ')
   let playTime = 0
   let totalTime = 0
   let playRate = 0
@@ -120,31 +122,33 @@
 </script>
 
 <style>
-  .audio-player-component {
+  .audio-player-component-line {
     height: 40px;
+    width: 100%;
+    min-width: 450px;
     background-color: black;
     color: white;
     display: inline-flex;
     box-sizing: content-box;
   }
-  .audio-player-component * {
+  .audio-player-component-line * {
     box-sizing: content-box;
   }
-  button {
+  .btn {
     position: relative;
+    height: 100%;
     margin: 0;
     padding: 0;
     border: 0;
     background: transparent;
   }
-  button span {
+  .btn span {
     position: absolute;
     font-size: 1px;
     color: black;
   }
   .timeline {
-    width: 300px;
-    max-width: 50vw;
+    flex: 2 2 auto;
     margin-left: 1rem;
     margin-right: 1rem;
   }
@@ -153,27 +157,36 @@
     max-width: 20vw;
     margin-right: 1rem;
   }
-  @media (max-width: 640px) {
-    .timeline,
+  @media (max-width: 600px) {
     .volume {
       display: none;
     }
+    .audio-player-component-line {
+      min-width: 360px;
+    }
   }
-  p {
+  @media (max-width: 480px) {
+    .timeline {
+      display: none;
+    }
+    .audio-player-component-line {
+      min-width: 0;
+    }
+  }
+  .timer {
     margin: auto;
-    padding: 0.3em 1em 0.1em;
-    line-height: 0.1;
+    padding: 0.3em 1em;
   }
 </style>
 
 <div class={classes}>
   {#if playing}
-    <button class="button-pause" on:click={pause}>
+    <button class="btn" on:click={pause}>
       <span>Pause</span>
       <PauseIcon />
     </button>
   {:else}
-    <button class="button-play" on:click={play}>
+    <button class="btn" on:click={play}>
       <span>Play</span>
       <PlayIcon />
     </button>
@@ -181,14 +194,14 @@
   <div class="timeline">
     <Dragger value={playRate} on:change={setTime} />
   </div>
-  <p>{formatTime(playTime)} / {formatTime(totalTime)}</p>
+  <p class="timer">{formatTime(playTime)} / {formatTime(totalTime)}</p>
   {#if muted}
-    <button class="button-pause" on:click={unmute}>
+    <button class="btn" on:click={unmute}>
       <span>Unmute</span>
       <VolumeOffIcon />
     </button>
   {:else}
-    <button class="button-play" on:click={mute}>
+    <button class="btn" on:click={mute}>
       <span>Mute</span>
       <VolumeOnIcon />
     </button>
