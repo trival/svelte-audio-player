@@ -121,9 +121,14 @@
 
 <style>
   .audio-player-component {
+    height: 40px;
     background-color: black;
     color: white;
     display: inline-flex;
+    box-sizing: content-box;
+  }
+  .audio-player-component * {
+    box-sizing: content-box;
   }
   button {
     position: relative;
@@ -156,7 +161,8 @@
   }
   p {
     margin: auto;
-    padding: 0.3em 1em;
+    padding: 0.3em 1em 0.1em;
+    line-height: 0.1;
   }
 </style>
 
