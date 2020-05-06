@@ -48,6 +48,11 @@
     }
     document.body.addEventListener('mouseup', stopDrag)
     document.body.addEventListener('mouseleave', stopDrag)
+
+    return () => {
+      document.body.removeEventListener('mouseup', stopDrag)
+      document.body.removeEventListener('mouseleave', stopDrag)
+    }
   })
 </script>
 
