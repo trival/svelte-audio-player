@@ -2,6 +2,9 @@
   import PlayIcon from './IconPlay.svelte'
   import PauseIcon from './icon_pause.svelte'
   import StopIcon from './icon_stop.svelte'
+  import VolumeOnIcon from './icon_volume_on.svelte'
+  import VolumeOffIcon from './icon_volume_off.svelte'
+  import Dragger from './dragger.svelte'
 
   // === props ===
 
@@ -15,14 +18,15 @@
   let classes = [className, 'root'].join(' ')
   let playTime = 0
   let totalTime = 0
-  let marker
+  let playRate = 0
+  let volume = 1
+  let muted = false
 
   $: {
-    let percentPlayed = Math.floor((100 * playTime) / totalTime) + '%'
-
-    if (marker) {
-      marker.style.left = percentPlayed
+    if (totalTime) {
+      playRate = playTime / totalTime
     }
+    muted = volume === 0
   }
 
   // === setup ===
@@ -46,6 +50,9 @@
   audioElement.addEventListener('timeupdate', function() {
     playTime = audioElement.currentTime
   })
+  audioElement.addEventListener('volumechange', function() {
+    volume = audioElement.volume
+  })
 
   // === events ===
 
@@ -63,7 +70,42 @@
 
   function stop() {
     pause()
-    audioElement.fastSeek(0)
+    audioElement.currentTime = 0
+  }
+
+  function mute() {
+    audioElement.volume = 0
+  }
+
+  function unmute() {
+    audioElement.volume = 1
+  }
+
+  function selectTime(e) {
+    dragging = true
+    console.log(dragging)
+    let x
+    if ('touches' in e) {
+      x = e.touches[0].clientX
+    } else {
+      x = e.clientX
+    }
+
+    if (timeline) {
+      const box = timeline.getBoundingClientRect()
+      if (box && x && totalTime) {
+        const time = ((x - box.left) / box.width) * totalTime
+        audioElement.currentTime = time
+      }
+    }
+  }
+
+  function setTime(e) {
+    audioElement.currentTime = e.detail * totalTime
+  }
+
+  function setVolume(e) {
+    audioElement.volume = e.detail
   }
 
   // === helpers ===
@@ -73,6 +115,8 @@
     const minutes = Math.floor(time / 60)
     return minutes + ':' + ('0' + seconds).substr(-2)
   }
+
+  // === live cycle ===
 </script>
 
 <style>
@@ -94,37 +138,20 @@
     color: black;
   }
   .timeline {
-    position: relative;
     width: 300px;
     max-width: 50vw;
-    height: 15px;
-    margin: auto 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
-  .timeline::after {
-    content: ' ';
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background: white;
-    z-index: 0;
-    margin: auto;
+  .volume {
+    width: 60px;
+    max-width: 20vw;
+    margin-right: 1rem;
   }
-  .marker {
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    height: 15px;
-    background-color: white;
-    border: 3px solid black;
-    z-index: 1;
-    margin: auto;
-    cursor: grab;
+  @media (max-width: 400px) {
+    .timeline {
+      display: none;
+    }
   }
   p {
     margin: auto;
@@ -144,12 +171,22 @@
       <PlayIcon />
     </button>
   {/if}
-  <button class="button-stop" on:click={stop}>
-    <span>Stop</span>
-    <StopIcon />
-  </button>
   <div class="timeline">
-    <span class="marker" bind:this={marker} />
+    <Dragger value={playRate} on:change={setTime} />
   </div>
   <p>{formatTime(playTime)} / {formatTime(totalTime)}</p>
+  {#if muted}
+    <button class="button-pause" on:click={unmute}>
+      <span>Unmute</span>
+      <VolumeOffIcon />
+    </button>
+  {:else}
+    <button class="button-play" on:click={mute}>
+      <span>Mute</span>
+      <VolumeOnIcon />
+    </button>
+  {/if}
+  <div class="volume">
+    <Dragger value={volume} on:change={setVolume} />
+  </div>
 </div>
