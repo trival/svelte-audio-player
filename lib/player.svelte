@@ -148,8 +148,9 @@
     max-width: 20vw;
     margin-right: 1rem;
   }
-  @media (max-width: 400px) {
-    .timeline {
+  @media (max-width: 640px) {
+    .timeline,
+    .volume {
       display: none;
     }
   }
