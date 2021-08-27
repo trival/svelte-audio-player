@@ -1,11 +1,12 @@
 <svg width="65px" height="40px" viewBox="0 0 65 40">
-  <title>Volume on</title>
-  <g
-    id="Lautstärke-an"
-    transform="translate(16.000000, 9.000000)"
-    fill="#FFFEFE">
-    <path
-      d="M13.090717,11.1015971 L19,19 L-3,19 L2.90928303,11.1015971
+	<title>Volume on</title>
+	<g
+		id="Lautstärke-an"
+		transform="translate(16.000000, 9.000000)"
+		fill="#FFFEFE"
+	>
+		<path
+			d="M13.090717,11.1015971 L19,19 L-3,19 L2.90928303,11.1015971
       C2.89837721,10.8961548 2.89285714,10.6636807 2.89285714,10.3974154
       L2.89285714,6.8458278 C2.89285714,5.50854969 3.03209556,5.02362033
       3.2935562,4.53473144 C3.55501684,4.04584256 3.9386997,3.66215969
@@ -15,13 +16,14 @@
       C12.9679044,5.02362033 13.1071429,5.50854969 13.1071429,6.8458278
       L13.1071429,10.3974154 C13.1071429,10.6636807 13.1016228,10.8961548
       13.090717,11.1015971 Z"
-      id="Combined-Shape"
-      transform="translate(8.000000, 11.000000) scale(-1, 1) rotate(90.000000)
-      translate(-8.000000, -11.000000) " />
-    <g id="Group" transform="translate(19.000000, 2.000000)">
-      <rect id="Rectangle" x="12" y="0" width="3" height="18" />
-      <rect id="Rectangle" x="6" y="3" width="3" height="13" />
-      <rect id="Rectangle" x="0" y="6" width="3" height="7" />
-    </g>
-  </g>
+			id="Combined-Shape"
+			transform="translate(8.000000, 11.000000) scale(-1, 1) rotate(90.000000)
+      translate(-8.000000, -11.000000) "
+		/>
+		<g id="Group" transform="translate(19.000000, 2.000000)">
+			<rect id="Rectangle" x="12" y="0" width="3" height="18" />
+			<rect id="Rectangle" x="6" y="3" width="3" height="13" />
+			<rect id="Rectangle" x="0" y="6" width="3" height="7" />
+		</g>
+	</g>
 </svg>
