@@ -8,7 +8,7 @@
 	// === props ===
 
 	export let audioElement
-	export const className = ''
+	export let className = ''
 
 	// === state ===
 
